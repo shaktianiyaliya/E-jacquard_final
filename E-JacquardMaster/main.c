@@ -1,3 +1,28 @@
+/****************************************************************************
+
+* Copyright (C) 2020 by Devsystech                                    *
+
+* @version V1.0                             *
+
+* This is the main part of the code which contain functional blocks of project *
+
+****************************************************************************/
+
+/**
+
+* @file main.c
+
+* @author Jayaram
+
+* @date 17 Sep 2020
+
+* @brief   Default main function.
+
+* @brief File containing header files for file processing, usb drive access and dispaying in LCD.
+
+*/
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "main.h"
@@ -10,6 +35,12 @@ extern int keypad_init(void);
 
 unsigned int  gState 	= EJACQUARD_STATE_IDLE;
 unsigned int  gFileType	= EJACQUARD_FILE_TYPE_PALLU; /* Assuming default FileType is pallu */
+
+/**
+
+Main entry point of the program.
+
+*/
 
 int main(void)
 {
