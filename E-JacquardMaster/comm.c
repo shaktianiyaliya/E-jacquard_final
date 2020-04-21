@@ -10,15 +10,42 @@
 
 
 static int sgFileDesc = 0;
-static char comm_buf[256];
-/*
- *
- *  Configures the serial terminal settings.
- */
+static char comm_buf[256];/* buffer is limited to 255 characters, just like the maximum string length for canonical input processing.*/ 
+
+/**
+  * @brief Configures the serial terminal settings.
+  * @note  tcgetattr(fd, &term): save current serial port settings.
+  * @note  termios contains flags as structr members are c_lflag,c_iflag,c_cflag,c_oflag.
+	   c_iflag -- input modes.
+	   c_oflag -- control modes.
+	   c_cflag -- control modes.
+	   c_lflag -- local modes. 
+  * @note  ISIG    :When any of the characters INTR, QUIT, SUSP, or DSUSP are received,
+		   generate the corresponding signal.
+	   ICANON  : enable canonical input. 
+	   ECHO    : Echo input characters(here it disable all echo functionality, and don't send signals to calling program).
+	   IEXTEN  : Enable implementation-defined input processing.  This flag, as
+              	     well as ICANON must be enabled for the special characters
+              	     EOL2, LNEXT, REPRINT, WERASE to be interpreted, and for the
+              	     IUCLC flag to be effective.
+	   ICRNL   :Translate carriage return to newline on input (unless IGNCR is set).
+	   IXON    :Enable XON/XOFF flow control on output.
+	   HUPCL   :Lower modem control lines after last process closes the device
+             	    (hang up).
+	   OPOST   :Enable implementation-defined output processing.
+
+	    
+  * @note    
+  * @param  No parameter.
+  * @retval zeo
+  */
+
+
+
+
 static int serial_init(int fd, UINT32_T baudRate)
 {
 	struct termios term;
-
 	if(-1 == tcgetattr(fd, &term))
 	{
 		perror("init_termios");
@@ -50,12 +77,27 @@ static int serial_init(int fd, UINT32_T baudRate)
 	return 0;
 }
 
+/**
+  * @brief  Initialize the communication channel with extended board.
+  * @note   Declare the termios structre which provide a general terminal interface that is
+       	    provided to control asynchronous communications ports.
+  * @note   If the file opens successfully the function will return 0 t0 fd else it will return negative value
+	    and throw error.
+  * @note   serial_init(fd, EJACQUARD_BAUD_RATE): Configures the serial terminal settings. 
+  * @param  No parameter.
+  * @retval zeo
+  */
 
-/* Initialize the communication channel with extended board */
+
 int comm_init(void)
 {
 	int fd;  
 	struct termios SPortSettings;
+
+	/* 
+          Open usb device for reading and writing and not as controlling tty
+          because we don't want to get killed if linenoise sends CTRL-C.
+        */	
 	fd = open(EJACQUARD_SERIAL_UART, O_RDWR | O_NOCTTY);
 
 	if (fd < 0)
