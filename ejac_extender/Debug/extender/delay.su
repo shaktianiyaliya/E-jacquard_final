@@ -1,6 +1,0 @@
-delay.c:19:13:_init_tim3	32	static
-delay.c:51:13:_stop_timer	8	static
-delay.c:68:6:tim3_delay_us	8	static
-delay.c:100:6:tim3_start_us_timer	8	static
-delay.c:126:10:tim3_check_us_timer	8	static
-delay.c:152:6:tim3_stop_us_timer	8	static

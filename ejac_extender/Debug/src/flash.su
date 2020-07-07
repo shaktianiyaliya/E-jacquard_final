@@ -1,2 +1,0 @@
-flash.c:20:5:flash_write	24	static
-flash.c:81:12:flash_sector_erase	8	static
