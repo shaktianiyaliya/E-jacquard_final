@@ -1,0 +1,6 @@
+uart.c:11:6:uart_init	40	static
+uart.c:51:6:USART1_IRQHandler	16	static
+uart.c:173:6:response	88	static
+uart.c:108:6:sel_action	16	static
+uart.c:261:6:currline_response	56	static
+uart.c:296:18:erase_flash	8	static

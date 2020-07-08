@@ -1,0 +1,2 @@
+ejacTrace.c:7:6:ejac_trace_uart_init	40	static
+ejacTrace.c:48:6:ejac_trace	16	static
